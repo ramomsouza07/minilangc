@@ -6,10 +6,10 @@
 #define BUFFER_SIZE 1024
 #define MAX_LINHAS 100
 
-int i = 0; //variavel de acesso global que é usada para contagem de linhas
+int i = 0; //variavel de acesso global que Ã© usada para contagem de linhas
 int quantidade_de_variaveis = 0; //quantidade de variaveis pressupostas no programa
-int contadorDeVariaveis = 0; //contadores de variaveis (são nossa forma de endereço)
-//vai indicar até pnde precisamos buscar variáveis em um arranjo (nossa versão de memoria)
+int contadorDeVariaveis = 0; //contadores de variaveis (sÃ£o nossa forma de endereÃ§o)
+//vai indicar atÃ© pnde precisamos buscar variÃ¡veis em um arranjo (nossa versÃ£o de memoria)
 int erro = 0; //variavel que vai parar o programa caso em algum momento ele ache um erro
 
 char variavel_para_busca[32], completude[32]; //strings para trabalhar com as variaveis que o usuario digita
@@ -23,16 +23,16 @@ typedef struct { //struct comandos. cada struct dessa possui uma linha do arquiv
     char line[BUFFER_SIZE];
 } Comands;
 
-int linhas(){//essa função conta as linhas do txt. usamos isso para criar tantas struct's Comands quanto houverem linhas no txt
+int linhas(){//essa funÃ§Ã£o conta as linhas do txt. usamos isso para criar tantas struct's Comands quanto houverem linhas no txt
 	char linhas[30];
 	FILE *file = fopen("programa.txt", "r");
-    if (file == NULL) { //clausula de erro padrão
+    if (file == NULL) { //clausula de erro padrÃ£o
         return -1;
     }
 
     i = 0;
     
-    while(fgets(linhas, 30, file) != NULL) { //laço que se repete enquanto houver algo no txt
+    while(fgets(linhas, 30, file) != NULL) { //laÃ§o que se repete enquanto houver algo no txt
         i++;
     }
     fclose(file);
@@ -41,10 +41,10 @@ int linhas(){//essa função conta as linhas do txt. usamos isso para criar tantas
 	
 }
 
-int read(Comands *c) { //função que copia linha a linha do txt nas struct comand
+int read(Comands *c) { //funÃ§Ã£o que copia linha a linha do txt nas struct comand
 	char teste[10];
     FILE *file = fopen("programa.txt", "r");
-    if (file == NULL) { //outra clausula de erro padrão
+    if (file == NULL) { //outra clausula de erro padrÃ£o
         return -1;
     }
 
@@ -52,8 +52,8 @@ int read(Comands *c) { //função que copia linha a linha do txt nas struct comand
     while (fgets(c[i].line, sizeof(c[i].line), file) != NULL) {
 		sscanf(c[i].line, "%s", teste); //avalia o primeiro comando
 
-		if(strlen(teste) == 3 || strcmp(teste, "INPUT") == 0){ //se o primeiro comando for SET, ADD, SUB, MUL, DIV, INPUT, presupomos que uma variável será declarada
-			quantidade_de_variaveis++; //aumentamos a quantidade de variáveis com base na suposição anterior
+		if(strlen(teste) == 3 || strcmp(teste, "INPUT") == 0){ //se o primeiro comando for SET, ADD, SUB, MUL, DIV, INPUT, presupomos que uma variÃ¡vel serÃ¡ declarada
+			quantidade_de_variaveis++; //aumentamos a quantidade de variÃ¡veis com base na suposiÃ§Ã£o anterior
 		}
 
         size_t len = strlen(c->line);
@@ -66,7 +66,7 @@ int read(Comands *c) { //função que copia linha a linha do txt nas struct comand
     return 0;
 }
 
-int linha_vazia(const char *str) { //função que avalia se uma linha está vazia, caso no qual, faz o programa ignorar uma linha inteira para poupar tempo
+int linha_vazia(const char *str) { //funÃ§Ã£o que avalia se uma linha estÃ¡ vazia, caso no qual, faz o programa ignorar uma linha inteira para poupar tempo
 	while (*str != '\0') {
 		if (!isspace((unsigned char)*str)) {
 			return 0;
@@ -77,7 +77,7 @@ int linha_vazia(const char *str) { //função que avalia se uma linha está vazia, 
 }
 
 int identificarComando(const char *comando) { /*recebe o comando (primeira string de cada linha) e 
-retorna o valor que irá ser usado para chamar a função que executa o comando correspondente*/
+retorna o valor que irÃ¡ ser usado para chamar a funÃ§Ã£o que executa o comando correspondente*/
     if (strcmp(comando, "SET") == 0) return 1;
     if (strcmp(comando, "ADD") == 0) return 2;
     if (strcmp(comando, "SUB") == 0) return 3;
@@ -89,16 +89,16 @@ retorna o valor que irá ser usado para chamar a função que executa o comando cor
 	if (strcmp(comando, "IF") == 0) return 9;
 	if (strcmp(comando, "ENDIF") == 0) return 10;
 	if (strcmp(comando, "INPUT") == 0) return 11;
-	erro = 1; //Se a função chega até aqui, o comando digitado não é reconhecido. Logo, temos um erro
+	erro = 1; //Se a funÃ§Ã£o chega atÃ© aqui, o comando digitado nÃ£o Ã© reconhecido. Logo, temos um erro
     return -1;
 }
 
-void SET(char c[], Variavel *var, int k){ //Função SET
+void SET(char c[], Variavel *var, int k){ //FunÃ§Ã£o SET
 	int temporaria = 0;
 	int teste_variavel_ja_existente = 0;
 	char variavel_ja_existente[32];
 	
-	if(sscanf(c, "%*s %d", &temporaria) == 1){ //confere se o úsuario não tentou usa um número para nomear variáveis
+	if(sscanf(c, "%*s %d", &temporaria) == 1){ //confere se o Ãºsuario nÃ£o tentou usa um nÃºmero para nomear variÃ¡veis
 		erro = 1;
 		printf("Numeros nao podem nomear variaveis. Linha %d: %s", k+1, c);
 		return ;
@@ -110,7 +110,7 @@ void SET(char c[], Variavel *var, int k){ //Função SET
 		return ;
 	}
 	
-	if(sscanf(c, "%*s %*s %*s %s", completude) != 0){ //descobre se o usuario não excedeu o numero esperado de comandos
+	if(sscanf(c, "%*s %*s %*s %s", completude) != 0){ //descobre se o usuario nÃ£o excedeu o numero esperado de comandos
 		erro = 1;
 		printf("Comando com termos demais na linha %d: %s", k+1, c);
 		return ;
@@ -118,10 +118,10 @@ void SET(char c[], Variavel *var, int k){ //Função SET
 
 	sscanf(c, "%*s %s", variavel_para_busca);
 
-	for(int prv = 0; prv <= contadorDeVariaveis; prv++){ //verifica se o úsuario está usando uma variável já existente
-        if(strcmp(var[prv].nome, variavel_para_busca) == 0){ //caso ela já exista:
-            if(sscanf(c, "%*s %*s %d", &temporaria) == 1){ //confere se o úsuario está tentando usar outra variavel para iniciar esta
-            	var[prv].valor = temporaria; //caso não esteja, pega o valor inteiro e associa a variavel
+	for(int prv = 0; prv <= contadorDeVariaveis; prv++){ //verifica se o Ãºsuario estÃ¡ usando uma variÃ¡vel jÃ¡ existente
+        if(strcmp(var[prv].nome, variavel_para_busca) == 0){ //caso ela jÃ¡ exista:
+            if(sscanf(c, "%*s %*s %d", &temporaria) == 1){ //confere se o Ãºsuario estÃ¡ tentando usar outra variavel para iniciar esta
+            	var[prv].valor = temporaria; //caso nÃ£o esteja, pega o valor inteiro e associa a variavel
 			}
             else{ //caso esteja, procura a variavel correspondente e associa o seu valor no lugar do inteiro esperado
             	sscanf(c, "%*s %*s %s", variavel_ja_existente);
@@ -130,7 +130,7 @@ void SET(char c[], Variavel *var, int k){ //Função SET
                			var[prv].valor = var[atp].valor;
                 		break;
             		}
-            		if(atp == contadorDeVariaveis - 1){ //caso não seja possivel encontrar a variável buscada:
+            		if(atp == contadorDeVariaveis - 1){ //caso nÃ£o seja possivel encontrar a variÃ¡vel buscada:
                 		printf("Variavel inexistente na linha %d: %s\n", k + 1, c);
                 		erro = 1;
                 		return ;
@@ -142,8 +142,8 @@ void SET(char c[], Variavel *var, int k){ //Função SET
     }
 	
 	char temp[32];
-	//caso seja uma variável inedita:
-    if(sscanf(c, "%*s %s %d", temp, &temporaria) == 2){ //avalia se o valor final é inteiro
+	//caso seja uma variÃ¡vel inedita:
+    if(sscanf(c, "%*s %s %d", temp, &temporaria) == 2){ //avalia se o valor final Ã© inteiro
     	strcpy(var[contadorDeVariaveis].nome, temp);
 		var[contadorDeVariaveis].valor = temporaria;
 	}
@@ -173,7 +173,7 @@ void INPUT(char c[], Variavel *var, int k){ //comando INPUT
 	char nome_var_input[32]; 
 	int teste_erro = 0;
 		
-	if(sscanf(c, "%*s %*s %s", nome_var_input) != 0){ //avalia se o usuario não excedeu o limite esperado
+	if(sscanf(c, "%*s %*s %s", nome_var_input) != 0){ //avalia se o usuario nÃ£o excedeu o limite esperado
 		erro = 1;
 		printf("INPUT com termos demais na linha %d: %s", k + 1, c);
 		return ;
@@ -183,8 +183,8 @@ void INPUT(char c[], Variavel *var, int k){ //comando INPUT
 		printf("Tentativa de usar numero como variavel na linha %d: %s", k + 1, c);
 	}
 		
-	if (sscanf(c, "%*s %s", nome_var_input) != 1) { //Associa a variável a ser escrita ao nome_var_input, 
-		printf("Erro de sintaxe no comando INPUT: %s\n", c); //caso não hajam variaveis aqui alerta o úsuario do erro
+	if (sscanf(c, "%*s %s", nome_var_input) != 1) { //Associa a variÃ¡vel a ser escrita ao nome_var_input, 
+		printf("Erro de sintaxe no comando INPUT: %s\n", c); //caso nÃ£o hajam variaveis aqui alerta o Ãºsuario do erro
 		erro = 1;
 		return;
 	}
@@ -208,7 +208,7 @@ void INPUT(char c[], Variavel *var, int k){ //comando INPUT
 		}
 	}
 
-	if (!encontrado) { //se ela não existir, cria uma nova variável
+	if (!encontrado) { //se ela nÃ£o existir, cria uma nova variÃ¡vel
 		strcpy(var[contadorDeVariaveis].nome, nome_var_input);
 		printf("Digite um valor para %s: ", nome_var_input);
 		scanf("%d", &var[contadorDeVariaveis].valor);
@@ -256,7 +256,7 @@ int operacao(char linha_comando[], Variavel *var, int k, char op) {
         }
     }
 
-    if (sscanf(linha_comando, "%*s %*s %d", &temp1) != 1) { //mesmo procedimento que as linhas anteriores, só que para o segundo operando
+    if (sscanf(linha_comando, "%*s %*s %d", &temp1) != 1) { //mesmo procedimento que as linhas anteriores, sÃ³ que para o segundo operando
         sscanf(linha_comando, "%*s %*s %s", variavel_para_busca);
         for(int prv = 0; prv <= contadorDeVariaveis; prv++){
             if(strcmp(var[prv].nome, variavel_para_busca) == 0){
@@ -278,17 +278,17 @@ int operacao(char linha_comando[], Variavel *var, int k, char op) {
 	}
 
     sscanf(linha_comando, "%*s %*s %*s %s", variavel_para_busca); //pega a variavel que usaremos
-    int VarADD = 0; //variavel para testar se a variavel que usaremos já existe 
+    int VarADD = 0; //variavel para testar se a variavel que usaremos jÃ¡ existe 
 
     for(int prv = 0; prv < contadorDeVariaveis; prv++){ //caso exista:
         if(strcmp(var[prv].nome, variavel_para_busca) == 0){ //encontra a variavel
             VarADD = 1;
-            switch(op) { //faz com ela a operação sinalizada
+            switch(op) { //faz com ela a operaÃ§Ã£o sinalizada
                 case '+': var[prv].valor = temp + temp1; break;
                 case '-': var[prv].valor = temp - temp1; break;
                 case '*': var[prv].valor = temp * temp1; break;
                 case '/':
-                    if (temp1 == 0) { //caso o úsuario tente pecar:
+                    if (temp1 == 0) { //caso o Ãºsuario tente pecar:
                         printf("Erro: Divisao por zero na linha %d: %s\n", k + 1, linha_comando);
                         erro = 1;
                         return -1;
@@ -299,9 +299,9 @@ int operacao(char linha_comando[], Variavel *var, int k, char op) {
         }
     }
 
-    if (!VarADD) { //caso seja variável inedita:
-        strcpy(var[contadorDeVariaveis].nome, variavel_para_busca); //copia o nome da variavel na posição de um nova var
-        switch(op) { //faz a operação sinalizada
+    if (!VarADD) { //caso seja variÃ¡vel inedita:
+        strcpy(var[contadorDeVariaveis].nome, variavel_para_busca); //copia o nome da variavel na posiÃ§Ã£o de um nova var
+        switch(op) { //faz a operaÃ§Ã£o sinalizada
             case '+': var[contadorDeVariaveis].valor = temp + temp1; break;
             case '-': var[contadorDeVariaveis].valor = temp - temp1; break;
             case '*': var[contadorDeVariaveis].valor = temp * temp1; break;
@@ -313,16 +313,16 @@ int operacao(char linha_comando[], Variavel *var, int k, char op) {
                 }
                 var[contadorDeVariaveis].valor = temp / temp1; break;
         }
-        contadorDeVariaveis++; //nesse caso, como houve declaração de var, aumenta o valor do contador
+        contadorDeVariaveis++; //nesse caso, como houve declaraÃ§Ã£o de var, aumenta o valor do contador
         return 0;
     }
 }
 
-int EXIBIR(char c[], Variavel *var, int k){	//função EXIBIR
+int EXIBIR(char c[], Variavel *var, int k){	//funÃ§Ã£o EXIBIR
 	int teste_erro = 0;
 	
 	if(sscanf(c, "%*s, %d", teste_erro) != 0){ //testa se o usuario esta tentando imprimit um inteiro
-		printf("Tentativa de impressão de numero inteiro na linha %d: %s", k+1, c);
+		printf("Tentativa de impressÃ£o de numero inteiro na linha %d: %s", k+1, c);
 		erro = 1;
 		return -1;
 	} 
@@ -333,7 +333,7 @@ int EXIBIR(char c[], Variavel *var, int k){	//função EXIBIR
 		return -1;
 	}
 	
-	if(sscanf(c, "%*s %*s %s", completude) != 0){ //testa se há termos demais
+	if(sscanf(c, "%*s %*s %s", completude) != 0){ //testa se hÃ¡ termos demais
 		printf("Comando EXIBIR com termos alem do tolerado na linha %d; %s ", k+1, c);
 		erro = 1;
 		return -1;
@@ -376,8 +376,8 @@ int LOOP(char c[], int *k, Variavel *var, int temp){ //comando LOOP
 			erro = 1;
 			return -1;
 		}
-		else if(repeticoes == 0){ //caso seja 0 pula para ENDLOOP que está na posição temp
-			*k = temp; //note que estamos alterando direto no endereço. Sem ponteiros isso seria impossivel
+		else if(repeticoes == 0){ //caso seja 0 pula para ENDLOOP que estÃ¡ na posiÃ§Ã£o temp
+			*k = temp; //note que estamos alterando direto no endereÃ§o. Sem ponteiros isso seria impossivel
 		}
 		else if(repeticoes > 0){ //caso seja um valor positivo retorna-o
 			return repeticoes;
@@ -392,8 +392,8 @@ int LOOP(char c[], int *k, Variavel *var, int temp){ //comando LOOP
 					erro = 1;
 					return -1;
 				}
-				else if(var[prv].valor == 0){ //caso seja 0 pula para ENDLOOP que está na posição temp
-					*k = temp; //note que estamos alterando direto no endereço. Sem ponteiros isso seria impossivel
+				else if(var[prv].valor == 0){ //caso seja 0 pula para ENDLOOP que estÃ¡ na posiÃ§Ã£o temp
+					*k = temp; //note que estamos alterando direto no endereÃ§o. Sem ponteiros isso seria impossivel
 				}
 				else if(var[prv].valor > 0){ //caso seja um valor positivo retorna-o
 					return var[prv].valor;
@@ -462,7 +462,7 @@ void IF(char c[], int *k, Variavel *var, int fim){ //Ccomando IF
 		return ;
 		}
 		else{
-			(*k) = fim; //pula até ENDIF
+			(*k) = fim; //pula atÃ© ENDIF
 			return ;
 		}
 	}
@@ -506,7 +506,7 @@ int ONDE_ESTA_O_FIM(int k, Comands *c, const char qualfim[]){ //procura o ENDLOO
 						return -1;
 					}
 				}
-	return aux; //retorna a posição do fim
+	return aux; //retorna a posiÃ§Ã£o do fim
 }
 
 int main() { //comando principal
@@ -516,9 +516,9 @@ int main() { //comando principal
 		return -1;
 	}
 	
-	Comands c[x]; //declara tantos struct Comands quanto forem lidas linhas pela função linhas()
+	Comands c[x]; //declara tantos struct Comands quanto forem lidas linhas pela funÃ§Ã£o linhas()
 	char comando[10]; //declara um  char com tamanho 10 para receber comandos. (o maior comando tem 8 caracteres ENDLOOP + \0
-	x = read(c); //chama a função que copia o txt nos arranjos 
+	x = read(c); //chama a funÃ§Ã£o que copia o txt nos arranjos 
 	
 	if (x == -1) {
 		printf("Erro ao abrir o arquivo programa.txt\n");
@@ -528,14 +528,14 @@ int main() { //comando principal
 	int repeticoesloop = 0, comecoloop = 0, temp = 0; //variaveis de controle
 	Variavel var[quantidade_de_variaveis]; //cria tantas Variaveis quanto o programar tiver suposto existir
 
-	for (int k = 0; k < i; k++) { //executa i vezes. (i é a quantidade de linhas no programa)
-		if (linha_vazia(c[k].line)) continue; //se o retorno da função linha_vazia for 1 ignora essa linha e pula proxima
+	for (int k = 0; k < i; k++) { //executa i vezes. (i Ã© a quantidade de linhas no programa)
+		if (linha_vazia(c[k].line)) continue; //se o retorno da funÃ§Ã£o linha_vazia for 1 ignora essa linha e pula proxima
 		else{
 			sscanf(c[k].line, "%s", comando); //obtem a primeira string da linha
-			int codigo = identificarComando(comando); //manda essa string para a função de desambiguação
-			switch (codigo) { //manda o programa executar a função que lida com o comando identificado
+			int codigo = identificarComando(comando); //manda essa string para a funÃ§Ã£o de desambiguaÃ§Ã£o
+			switch (codigo) { //manda o programa executar a funÃ§Ã£o que lida com o comando identificado
 				case 1:
-					SET(c[k].line, var, k); //chama e envia as informações necessárias para as funções
+					SET(c[k].line, var, k); //chama e envia as informaÃ§Ãµes necessÃ¡rias para as funÃ§Ãµes
 					break;
 				case 2:
 					operacao(c[k].line, var, k, '+');
@@ -558,12 +558,12 @@ int main() { //comando principal
 						break;
 					}
 					comecoloop = k; //guarda a origem do loop em uma das variavies de controle
-					repeticoesloop = LOOP(c[k].line, &k, var, temp); //obtem o valor de repetições
+					repeticoesloop = LOOP(c[k].line, &k, var, temp); //obtem o valor de repetiÃ§Ãµes
 					break;
 				case 8: //ENDLOOP
-					if(repeticoesloop > 1){ //se houverem repetições a serem feitas altera k para a origem do loop
+					if(repeticoesloop > 1){ //se houverem repetiÃ§Ãµes a serem feitas altera k para a origem do loop
 						k = comecoloop;
-						repeticoesloop--; //reduz as repetições em um
+						repeticoesloop--; //reduz as repetiÃ§Ãµes em um
 					}
 					break;
 				case 9:
@@ -571,7 +571,7 @@ int main() { //comando principal
 					if(temp == -1){
 						break;
 					}
-					IF(c[k].line, &k, var, temp); //essa função altera o endereço de k caso o if seja falso mandando-o para o ENDIF e, caso contrario, não faz nada
+					IF(c[k].line, &k, var, temp); //essa funÃ§Ã£o altera o endereÃ§o de k caso o if seja falso mandando-o para o ENDIF e, caso contrario, nÃ£o faz nada
 					break;
 				case 10: //ENDIF
 				//faz nada
@@ -580,9 +580,9 @@ int main() { //comando principal
 					INPUT(c[k].line, var, k);
 					break;
 				default:
-					printf("Erro de sintaxe ou comando desconhecido na linha %d: %s\n", k + 1, c[k].line); //caso o comando não seja reconhecido
+					printf("Erro de sintaxe ou comando desconhecido na linha %d: %s\n", k + 1, c[k].line); //caso o comando nÃ£o seja reconhecido
 			}
-			if(erro == 1){//para imediatamnete a execução caso encontre um erro
+			if(erro == 1){//para imediatamnete a execuÃ§Ã£o caso encontre um erro
 				break;
 			}
 		}
