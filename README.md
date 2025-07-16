@@ -30,6 +30,7 @@ A linguagem MiniLang suporta os seguintes comandos:
 <summary>Clique para expandir</summary>
 
 ```plaintext
+
 SET A 10
 SET B 5
 ADD A B C
@@ -44,6 +45,7 @@ ENDIF
 INPUT X
 MUL C X R
 EXIBIR R
+
 ```
 
 </details>
