@@ -1,4 +1,4 @@
-# 🧠 MiniLang - Interpretador de Linguagem Simples em C
+# 🧠 MiniLang - Interpretador de Linguagem em C
 
 Este projeto é um **interpretador de uma linguagem própria**, chamada *MiniLang*, desenvolvida em linguagem C. O objetivo é ler comandos simples de um arquivo `programa.txt`, interpretar instruções como declarações de variáveis, operações aritméticas, estruturas de controle (`IF`, `LOOP`) e comandos de entrada e saída.
 
