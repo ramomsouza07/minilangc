@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Apresentação - MiniLang</title>
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/black.css" />
+    <style>
+      section { padding: 20px; }
+      h1, h2, h3 { color: #00ffaa; }
+      p, li { font-size: 1.4rem; color: #eee; }
+      code { background: #333; padding: 2px 6px; border-radius: 4px; color: #0f0; }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Slide 1 -->
+        <section>
+          <h1>MiniLang</h1>
+          <h3>Um Interpretador de Linguagem Simples em C</h3>
+          <p>Desenvolvido por Ramom Souza</p>
+        </section>
+
+        <!-- Slide 2 -->
+        <section>
+          <h2>🎯 Objetivo do Projeto</h2>
+          <ul>
+            <li>Ler instruções de um arquivo <code>programa.txt</code></li>
+            <li>Interpretar comandos simples como SET, ADD, IF, LOOP, etc.</li>
+            <li>Simular a execução de um programa com variáveis e controle de fluxo</li>
+          </ul>
+        </section>
+
+        <!-- Slide 3 -->
+        <section>
+          <h2>🧰 Bibliotecas utilizadas</h2>
+          <ul>
+            <li><code>stdio.h</code> - entrada/saída</li>
+            <li><code>stdlib.h</code> - funções do sistema</li>
+            <li><code>string.h</code> - manipulação de strings</li>
+            <li><code>ctype.h</code> - checagem de caracteres</li>
+          </ul>
+        </section>
+
+        <!-- Slide 4 -->
+        <section>
+          <h2>🔤 Comandos Suportados</h2>
+          <ul>
+            <li><code>SET</code>, <code>INPUT</code>, <code>EXIBIR</code></li>
+            <li><code>ADD</code>, <code>SUB</code>, <code>MUL</code>, <code>DIV</code></li>
+            <li><code>IF</code>, <code>ENDIF</code></li>
+            <li><code>LOOP</code>, <code>ENDLOOP</code></li>
+          </ul>
+        </section>
+
+        <!-- Slide 5 -->
+        <section>
+          <h2>📁 Exemplo: programa.txt</h2>
+<pre><code>SET A 10
+SET B 5
+ADD A B C
+EXIBIR C
+LOOP 2
+  SUB C 1 C
+  EXIBIR C
+ENDLOOP
+</code></pre>
+        </section>
+
+        <!-- Slide 6 -->
+        <section>
+          <h2>🧠 Organização do Código</h2>
+          <ul>
+            <li>Leitura e contagem das linhas</li>
+            <li>Interpretação linha a linha</li>
+            <li>Executa função associada a cada comando</li>
+            <li>Trata erros e estrutura de controle</li>
+          </ul>
+        </section>
+
+        <!-- Slide 7 -->
+        <section>
+          <h2>🔄 Operações Aritméticas</h2>
+          <p>Comandos: <code>ADD</code>, <code>SUB</code>, <code>MUL</code>, <code>DIV</code></p>
+          <ul>
+            <li>Variáveis podem ser usadas como operandos</li>
+            <li>Resultado pode ser salvo em variável nova ou existente</li>
+            <li>Verificação de divisão por zero</li>
+          </ul>
+        </section>
+
+        <!-- Slide 8 -->
+        <section>
+          <h2>🧾 Comando SET</h2>
+          <p>Declara ou atualiza uma variável:</p>
+          <pre><code>SET X 5
+SET Y X</code></pre>
+          <ul>
+            <li>Valida quantidade de argumentos</li>
+            <li>Confere se a variável já existe</li>
+            <li>Aceita atribuição direta ou por outra variável</li>
+          </ul>
+        </section>
+
+        <!-- Slide 9 -->
+        <section>
+          <h2>📥 Comando INPUT</h2>
+          <ul>
+            <li>Solicita que o usuário digite um número</li>
+            <li>Cria a variável se ainda não existir</li>
+            <li>Valida que o valor digitado seja inteiro</li>
+          </ul>
+        </section>
+
+        <!-- Slide 10 -->
+        <section>
+          <h2>📤 Comando EXIBIR</h2>
+          <ul>
+            <li>Imprime o valor de uma variável na tela</li>
+            <li>Valida se a variável existe</li>
+            <li>Gera erro se tentar exibir um número direto</li>
+          </ul>
+        </section>
+
+        <!-- Slide 11 -->
+        <section>
+          <h2>🔁 Comando LOOP</h2>
+          <ul>
+            <li>Repete um bloco de código n vezes</li>
+            <li>Suporta valores fixos ou via variável</li>
+            <li>Ignora execução se o valor for 0</li>
+          </ul>
+        </section>
+
+        <!-- Slide 12 -->
+        <section>
+          <h2>❓ Comando IF</h2>
+          <ul>
+            <li>Executa um bloco somente se a condição for verdadeira</li>
+            <li>Operadores suportados: <code>&lt;</code>, <code>&gt;</code>, <code>==</code></li>
+            <li>Pula o bloco até <code>ENDIF</code> se a condição for falsa</li>
+          </ul>
+        </section>
+
+        <!-- Slide 13 -->
+        <section>
+          <h2>🚨 Tratamento de Erros</h2>
+          <ul>
+            <li>Comando inválido ou malformado</li>
+            <li>Variável não existente</li>
+            <li>Divisão por zero</li>
+            <li>Entrada incorreta no INPUT</li>
+          </ul>
+        </section>
+
+        <!-- Slide 14 -->
+        <section>
+          <h2>📌 Limitações</h2>
+          <ul>
+            <li>Limite de 100 variáveis</li>
+            <li>Linhas limitadas a 1024 caracteres</li>
+            <li>Busca e execução são case-sensitive</li>
+            <li>Não suporta expressões compostas</li>
+          </ul>
+        </section>
+
+        <!-- Slide 15 -->
+        <section>
+          <h2>📈 Melhorias Futuras</h2>
+          <ul>
+            <li>Alocação dinâmica de variáveis</li>
+            <li>Busca case-insensitive</li>
+            <li>Expressões matemáticas completas</li>
+            <li>Mais comandos (ex: ELSE, FOR, WHILE)</li>
+            <li>Exportar variáveis em JSON ou CSV</li>
+          </ul>
+        </section>
+
+        <!-- Slide 16 -->
+        <section>
+          <h1>Obrigado!</h1>
+          <h3>Dúvidas? Perguntas? Sugestões?</h3>
+          <p><code>MiniLang - C Interpreter</code></p>
+        </section>
+
+      </div>
+    </div>
+    <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize();
+    </script>
+  </body>
+</html>
